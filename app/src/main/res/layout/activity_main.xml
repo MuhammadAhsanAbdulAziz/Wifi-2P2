@@ -1,19 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/connection_status"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="#A2F34C"
+        android:text="connection status"
+        android:gravity="center"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="40sp"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        
+        <Button
+            android:layout_marginHorizontal="5sp"
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:text="ON/OFF"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:layout_marginHorizontal="5sp"
+            android:id="@+id/switch2"
+            android:layout_width="wrap_content"
+            android:text="Discover"
+            android:layout_height="wrap_content"/>
+        
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="230sp"
+        android:layout_marginTop="50sp"
+        android:background="#AE81CE"/>
+    
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40sp"
+        android:text="Message"
+        android:gravity="center"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/inputText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/sendBtn"
+            app:layout_constraintStart_toStartOf="parent"/>
+        
+        <ImageButton
+            android:id="@+id/sendBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_send_24"
+            app:layout_constraintBottom_toBottomOf="@id/inputText"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
