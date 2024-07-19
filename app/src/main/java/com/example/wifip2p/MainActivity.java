@@ -79,10 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 peers.clear();
                 peers.addAll(wifiP2pDeviceList.getDeviceList());
 
-                if (peers.isEmpty()) {
-                    connectionStatus.setText("No Device found");
-                    return;
-                }
+
 
                 deviceNameArray = new String[wifiP2pDeviceList.getDeviceList().size()];
                 deviceArray = new WifiP2pDevice[wifiP2pDeviceList.getDeviceList().size()];
@@ -91,11 +88,16 @@ public class MainActivity extends AppCompatActivity {
                 for (WifiP2pDevice device : wifiP2pDeviceList.getDeviceList()) {
                     deviceNameArray[index] = device.deviceName;
                     deviceArray[index] = device;
+                    index++;
                 }
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNameArray);
                 ls.setAdapter(adapter);
 
+                if (peers.isEmpty()) {
+                    connectionStatus.setText("No Device found");
+                    return;
+                }
 
             }
         }
@@ -227,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public class Server extends Thread {
-        String hostAdd;
+        ServerSocket serverSocket;
         private InputStream inputStream;
         private OutputStream outputStream;
 
@@ -246,7 +248,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             try {
-                socket.connect(new InetSocketAddress(hostAdd, 8888), 500);
+                serverSocket = new ServerSocket(8888);
+                socket = serverSocket.accept();
                 inputStream = socket.getInputStream();
                 outputStream = socket.getOutputStream();
             } catch (IOException e) {
